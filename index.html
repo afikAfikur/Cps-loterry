@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CPS Topic Lottery</title>
+<style>
+body{font-family:Arial;max-width:1000px;margin:auto;padding:20px}
+input,button{padding:12px}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+td,th{border:1px solid #ddd;padding:10px}
+th{background:#f5f5f5}
+.msg{background:#eef;padding:10px;margin:10px 0}
+</style>
+</head>
+<body>
+<h1>CPS Industrial Attachment Topic Lottery</h1>
+
+{% for m in get_flashed_messages() %}
+<div class="msg">{{m}}</div>
+{% endfor %}
+
+<form method="post" action="/draw">
+<input name="student" placeholder="Enter your name" required>
+<button>Draw Topic</button>
+</form>
+
+<p><b>Remaining Topics:</b> {{remaining}}</p>
+
+<table>
+<tr><th>Student</th><th>Topic</th></tr>
+{% for a in allocations %}
+<tr><td>{{a.student}}</td><td>{{a.topic}}</td></tr>
+{% endfor %}
+</table>
+
+<hr>
+<h3>Admin Reset</h3>
+<form method="post" action="/admin/reset">
+<input type="password" name="password" placeholder="Admin Password">
+<button>Reset Lottery</button>
+</form>
+</body>
+</html>
